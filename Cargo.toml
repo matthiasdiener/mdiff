@@ -1,0 +1,16 @@
+[package]
+name = "mdiff"
+version = "0.1.0"
+authors = ["Matthias Diener <matthias.diener@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+difference = "2.0"
+
+[dependencies.gtk]
+version = "0.7.1"
+features = ["v3_16"]
+
+[dependencies.gio]
+version = ""
+features = ["v2_44"]
