@@ -2,6 +2,11 @@
 name = "mdiff"
 version = "0.1.0"
 authors = ["Matthias Diener <matthias.diener@gmail.com>"]
+description = "Simple visual diff viewer."
+license = "MIT"
+documentation = "https://github.com/matthiasdiener/mdiff"
+homepage = "https://github.com/matthiasdiener/mdiff"
+repository = "https://github.com/matthiasdiener/mdiff"
 edition = "2018"
 
 [dependencies]
