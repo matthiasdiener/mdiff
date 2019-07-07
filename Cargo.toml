@@ -6,6 +6,7 @@ edition = "2018"
 
 [dependencies]
 difference = "2.0"
+sourceview = "0.7.0"
 
 [dependencies.gtk]
 version = "0.7.1"

@@ -79,10 +79,10 @@
                 <property name="can_focus">True</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkTextView" id="text_view1">
+                  <!-- <object class="GtkTextView" id="text_view1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                  </object>
+                  </object> -->
                 </child>
               </object>
               <packing>
@@ -97,10 +97,10 @@
                 <property name="can_focus">True</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkTextView" id="text_view2">
+                  <!-- <object class="GtkSourceView-3.0" id="text_view2">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                  </object>
+                  </object> -->
                 </child>
               </object>
               <packing>
