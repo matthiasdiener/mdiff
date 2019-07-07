@@ -14,7 +14,7 @@ difference = "2.0"
 sourceview = "0.7.0"
 
 [dependencies.gtk]
-version = "0.7.1"
+version = "0.7.0"
 features = ["v3_16"]
 
 [dependencies.gio]
