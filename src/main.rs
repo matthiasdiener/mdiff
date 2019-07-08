@@ -156,13 +156,13 @@ pub fn build_ui(application: &gtk::Application) {
     added_tag1.set_property_background(Some("green"));
 
     let removed_tag1 = gtk::TextTag::new(Some("removed"));
-    removed_tag1.set_property_background(Some("red"));
+    removed_tag1.set_property_background(Some("salmon"));
 
     let equal_tag1 = gtk::TextTag::new(Some("equal"));
     equal_tag1.set_property_background(Some("white"));
 
     let added_tag2 = gtk::TextTag::new(Some("added"));
-    added_tag2.set_property_background(Some("green"));
+    added_tag2.set_property_background(Some("greenyellow"));
 
     let removed_tag2 = gtk::TextTag::new(Some("removed"));
     removed_tag2.set_property_background(Some("red"));
@@ -222,7 +222,7 @@ fn diff(b1: &gtk::TextBuffer, b2: &gtk::TextBuffer) {
         .get_slice(&b2.get_start_iter(), &b2.get_end_iter(), true)
         .unwrap();
 
-    let Changeset { diffs, .. } = Changeset::new(&text1, &text2, "");
+    let Changeset { diffs, .. } = Changeset::new(&text1, &text2, "\n");
 
     let mut iter1 = b1.get_start_iter();
 

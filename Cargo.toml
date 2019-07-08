@@ -1,6 +1,6 @@
 [package]
 name = "mdiff"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Matthias Diener <matthias.diener@gmail.com>"]
 description = "Simple visual diff viewer."
 license = "MIT"
