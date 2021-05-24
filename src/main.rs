@@ -9,6 +9,58 @@ use std::env::args;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::Read;
+use std::process;
+
+pub struct App {
+    pub window: gtk::Window,
+    pub header: Header,
+}
+
+pub struct Header {
+    pub container: gtk::HeaderBar
+}
+
+impl App {
+    fn new() -> App {
+        // Create a new top level window.
+        let window = gtk::Window::new(gtk::WindowType::Toplevel);
+        // Create a the headerbar and it's associated content.
+        let header = Header::new();
+
+        // Set the headerbar as the title bar widget.
+        window.set_titlebar(Some(&header.container));
+        // Set the title of the window.
+        window.set_title("App Name");
+        // Set the window manager class.
+        window.set_wmclass("app-name", "App name");
+        // The icon the app will display.
+        gtk::Window::set_default_icon_name("iconname");
+
+        // Programs what to do when the exit button is used.
+        window.connect_delete_event(move |_, _| {
+            gtk::main_quit();
+            Inhibit(false)
+        });
+
+        // Return our main application state
+        App { window, header }
+    }
+}
+
+impl Header {
+    fn new() -> Header {
+        // Creates the main header bar container widget.
+        let container = gtk::HeaderBar::new();
+
+        // Sets the text to display in the title section of the header bar.
+        container.set_title(Some("App Name"));
+        // Enable the window controls within this headerbar.
+        container.set_show_close_button(true);
+
+        // Returns the header and all of it's state
+        Header { container }
+    }
+}
 
 // upgrade weak reference or return
 #[macro_export]
@@ -41,7 +93,7 @@ macro_rules! clone {
     );
 }
 
-pub fn build_ui(application: &gtk::Application) {
+pub fn build_ui(_application: &App) {
     let glade_src = include_str!("text_viewer.glade");
     let builder = Builder::new();
     builder
@@ -49,7 +101,7 @@ pub fn build_ui(application: &gtk::Application) {
         .expect("Couldn't add from string");
 
     let window: gtk::ApplicationWindow = builder.get_object("window").expect("Couldn't get window");
-    window.set_application(Some(application));
+    // window.set_application(Some(application));
     let open_button1: gtk::ToolButton = builder
         .get_object("open_button1")
         .expect("Couldn't get builder");
@@ -271,15 +323,19 @@ fn diff(b1: &gtk::TextBuffer, b2: &gtk::TextBuffer) {
 }
 
 fn main() {
-    let application = gtk::Application::new(
-        Some("com.github.gtk-rs.examples.text_viewer"),
-        Default::default(),
-    )
-    .expect("Initialization failed...");
+    // Initialize GTK before proceeding.
+    if gtk::init().is_err() {
+        eprintln!("failed to initialize GTK Application");
+        process::exit(1);
+    }
 
-    application.connect_activate(|app| {
-        build_ui(app);
-    });
+    // Initialize the UI's initial state
+    let app = App::new();
 
-    application.run(&args().collect::<Vec<_>>());
+    build_ui(&app);
+    // Make all the widgets within the UI visible.
+    app.window.show_all();
+
+    // Start the GTK main event loop
+    gtk::main();
 }
